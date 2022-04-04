@@ -14,7 +14,7 @@
                     <tr class="text-center">
                         <th>NO</th>
                         <th>JUDUL</th>
-                        <th>KONTEN</th>
+                        <th>PUBLISHED AT</th>
                         <th>STATUS</th>
                         <th>AKSI</th>
                     </tr>
@@ -22,8 +22,8 @@
                     @foreach ($posts as $post)
                     <tr>
                         <td>{{ $no++ }}</td>
-                        <td>{{ Str::substr($post->title,0,30)}}...</td>
-                        <td>{{ Str::substr($post->content,0,50)}}...</td>
+                        <td><a href="" class="link-primary">{{ Str::substr($post->title,0,100)}}</a></td>
+                        <td>{{ $post->published_at }}</td>
                         <td>
                             @if ( $post->status == 1)
                             <span class="badge bg-success">Posting</span>
@@ -39,7 +39,7 @@
                                     @csrf
                                     <input type="hidden" name="id" value="{{$post->id}}">
                                     <button class="btn btn-secondary btn-sm" type="submit"
-                                        onclick="confirmEditStatus()">Draft</button>
+                                        onclick="confirmEditStatusDraft()">Draft</button>
                                 </form>
                                 @else
                                 <form action="post-posting" method="post">
@@ -47,7 +47,7 @@
                                     @csrf
                                     <input type="hidden" name="id" value="{{$post->id}}">
                                     <button class="btn btn-success btn-sm" type="submit"
-                                        onclick="confirmEditStatus()">Posting</button>
+                                        onclick="confirmEditStatusPosting()">Posting</button>
                                 </form>
                                 @endif
 
@@ -83,7 +83,7 @@
         var form = event.target.form; 
        
         Swal.fire({
-            title: 'Yakin ingin menghapus artikel ?',
+            title: 'Yakin artikel dihapus ?',
             text: 'Artikel akan dihapus secara permanen',
             icon: 'warning',
             showCancelButton: true,
@@ -97,12 +97,32 @@
             })
     }
 
-    function confirmEditStatus() {
+    function confirmEditStatusPosting() {
         event.preventDefault(); 
         var form = event.target.form; 
        
         Swal.fire({
-            title: 'Yakin ingin mengganti status artikel ?',
+            title: 'Yakin posting artikel ?',
+            text : 'Artikel akan ditampilkan pada halaman website',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            })
+    }
+
+    function confirmEditStatusDraft() {
+        event.preventDefault(); 
+        var form = event.target.form; 
+       
+        Swal.fire({
+            title: 'Yakin draft artikel ?',
+            text : 'Artikel akan dihilangkan pada halaman website',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',

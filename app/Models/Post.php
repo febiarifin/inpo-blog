@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
+    use \Conner\Tagging\Taggable;
 
     protected $fillable = ['title', 'slug', 'content', 'image', 'status', 'published_at', 'user_id'];
 
@@ -19,10 +20,5 @@ class Post extends Model
     public function categories()
     {
         return $this->belongsToMany('App\Models\Category');
-    }
-
-    public function tags()
-    {
-        return $this->belongsToMany('App\Models\Tag');
     }
 }

@@ -41,3 +41,5 @@ Route::post('/post-draft', [PostController::class, 'draft']);
 Route::post('/post-delete', [PostController::class, 'destroy']);
 
 Route::post('/post-store', [PostController::class, 'store']);
+
+Route::post('/post-update', [PostController::class, 'update']);

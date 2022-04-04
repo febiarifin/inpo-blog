@@ -27,7 +27,9 @@
                             <select multiple class="form-control @error('categories') is-invalid @enderror"
                                 name="categories[]">
                                 @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{$category->name}}</option>
+                                <option value="{{ $category->id }}">
+                                    {{$category->name}}
+                                </option>
                                 @endforeach
                             </select>
                             @error('categories')
@@ -62,11 +64,26 @@
                 <div class="col-12 col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <label for="">Konten</label>
-                            <textarea name="content" class="form-control @error('content') is-invalid @enderror"
-                                rows="5" placeholder="Tulis konten">{{old('content')}}</textarea>
+                            <label for="content" class="form-label">Konten</label>
                             @error('content')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <p class="text-danger">{{$message}}</p>
+                            @enderror
+                            <input id="content" type="hidden" name="content" value="{{ old('content') }}">
+                            <trix-editor input="content"></trix-editor>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <label for="tags">Tags</label>
+                            <input class="form-control" type="text" data-role="tagsinput" name="tags"
+                                value="{{ old('tags') }}">
+                            @error('tags')
+                            <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>

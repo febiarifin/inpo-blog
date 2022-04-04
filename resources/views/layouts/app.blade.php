@@ -26,6 +26,26 @@
     <!--SweetAlert 2-->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <!--Trix editor-->
+    <link rel="stylesheet" type="text/css" href="{{asset('css/trix.css')}}">
+    <script type="text/javascript" src="{{asset('js/trix.js')}}"></script>
+
+    <!-- Bootstrap Tags Input CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css"
+        rel="stylesheet" />
+    <style>
+        .bootstrap-tagsinput .tag {
+            margin-right: 2px;
+            color: #ffffff;
+            background: #2196f3;
+            padding: 3px 7px;
+            border-radius: 3px;
+        }
+
+        .bootstrap-tagsinput {
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body>
@@ -58,6 +78,7 @@
                         </a>
                     </li>
 
+                    @if (Auth::user()->role == 1)
                     <li class="sidebar-item {{ $buttonCategory }}">
                         <a class="sidebar-link" href="">
                             <i class="align-middle" data-feather="tag"></i> <span class="align-middle">Manajemen
@@ -71,6 +92,7 @@
                                 class="align-middle">Pengaturan</span>
                         </a>
                     </li>
+                    @endif
 
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="/">
@@ -169,6 +191,9 @@
 
     <script src="{{asset('js/app.js')}}"></script>
     <script src="{{ asset('adminkit/js/app.js') }}"></script>
+    {{-- Bootstrap Tags Input CDN --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js"></script>
 </body>
 
 </html>
