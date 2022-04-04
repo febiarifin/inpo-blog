@@ -80,7 +80,7 @@
 
                     @if (Auth::user()->role == 1)
                     <li class="sidebar-item {{ $buttonCategory }}">
-                        <a class="sidebar-link" href="">
+                        <a class="sidebar-link" href="{{ route('categories') }}">
                             <i class="align-middle" data-feather="tag"></i> <span class="align-middle">Manajemen
                                 Kategori</span>
                         </a>
@@ -179,7 +179,7 @@
                     <div class="row text-muted">
                         <div class="col-6 text-start">
                             <p class="mb-0">
-                                <strong>Inpo Blog</strong></a> &copy; 2022
+                                <strong>{{ config('app.name', 'Laravel') }}</strong></a> &copy; 2022
                             </p>
                         </div>
                     </div>

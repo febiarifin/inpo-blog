@@ -25,7 +25,7 @@ class PostController extends Controller
     {
         $posts = Post::orderBy('created_at', 'DESC')->where('user_id', Auth::user()->id)->get();
 
-        return view('blog.posts', [
+        return view('pages.post.posts', [
             'pages' => 'Manajemen Artikel',
             'buttonDashboard' => '',
             'buttonPosts' => 'active',
@@ -40,7 +40,7 @@ class PostController extends Controller
     {
         $categories = Category::all();
 
-        return view('blog.create', [
+        return view('pages.post.create', [
             'pages' => 'Buat Artikel',
             'pages' => 'Buat Artikel',
             'buttonDashboard' => '',
@@ -104,7 +104,7 @@ class PostController extends Controller
         $categories = Category::all();
         $categoriesPost = $post->categories()->get();
 
-        return view('blog.edit', [
+        return view('pages.post.edit', [
             'pages' => 'Edit Artikel',
             'buttonDashboard' => '',
             'buttonPosts' => 'active',

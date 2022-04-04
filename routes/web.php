@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Models\Post;
 use League\CommonMark\Parser\Block\BlockContinue;
@@ -43,3 +44,13 @@ Route::post('/post-delete', [PostController::class, 'destroy']);
 Route::post('/post-store', [PostController::class, 'store']);
 
 Route::post('/post-update', [PostController::class, 'update']);
+
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
+
+Route::post('/category-delete', [CategoryController::class, 'destroy']);
+
+Route::post('/category-create', [CategoryController::class, 'store']);
+
+Route::post('/category-edit', [CategoryController::class, 'edit']);
+
+Route::post('/category-update', [CategoryController::class, 'update']);
