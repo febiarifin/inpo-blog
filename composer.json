@@ -12,7 +12,8 @@
         "laravel/tinker": "^2.7",
         "laravel/ui": "^3.4",
         "realrashid/sweet-alert": "^5.0",
-        "rtconner/laravel-tagging": "^4.1"
+        "rtconner/laravel-tagging": "^4.1",
+        "yajra/laravel-disqus": "^1.2"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

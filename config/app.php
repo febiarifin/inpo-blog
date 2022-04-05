@@ -168,6 +168,7 @@ return [
          * Package Service Providers...
          */
         \Conner\Tagging\Providers\TaggingServiceProvider::class,
+        Yajra\Disqus\DisqusServiceProvider::class,
         /*
          * Application Service Providers...
          */
