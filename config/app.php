@@ -195,4 +195,7 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
+    // laravel mix assets url
+    // 'mix_url' => env('APP_URL', null),
+
 ];

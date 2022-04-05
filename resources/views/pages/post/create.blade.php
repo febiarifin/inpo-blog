@@ -90,8 +90,8 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary"> <i class="align-middle" data-feather="save"></i> <span
-                    class="align-middle">Simpan</span></button>
+            <button type="submit" class="btn btn-primary"><span class="align-middle"> <i
+                        class="fa-solid fa-floppy-disk"></i> Simpan</span></button>
         </form>
     </div>
 </main>

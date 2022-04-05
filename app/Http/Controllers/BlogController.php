@@ -21,12 +21,20 @@ class BlogController extends Controller
         return view('pages.blog.index', [
             'posts' => $posts,
             'categories' => $categories,
+            'menuActive' => "",
         ]);
     }
 
     public function showPost($user, $id, $slug)
     {
-        $post = Post::find($id);
+        $user = User::where('name', $user)->first();
+
+        $post = Post::where('id', $id)->where('slug', $slug)->where('user_id', $user->id)->where('status', 1)->first();
+
+        if (!$post) {
+            abort(403);
+        }
+
         $categories = Category::all();
 
         $next = Post::where('id', '>', $post->id)->orderBy('id')->first();
@@ -37,41 +45,76 @@ class BlogController extends Controller
             'categories' => $categories,
             'next' => $next,
             'previous' => $previous,
+            'menuActive' => "",
         ]);
     }
 
     public function showByCategory($categorySlug)
     {
         $category = Category::where('slug', $categorySlug)->first();
-        $posts = $category->posts()->paginate(6);
+        $posts = $category->posts()->where('status', 1)->paginate(6);
         $categories = Category::all();
 
         return view('pages.blog.showByCategory', [
             'posts' => $posts,
-            'categories' => $categories
+            'categories' => $categories,
+            'menuActive' => $categorySlug,
         ]);
     }
 
     public function showByTag($tagSlug)
     {
-        $posts = Post::withAllTags($tagSlug)->paginate(6);
+        $posts = Post::withAllTags($tagSlug)->where('status', 1)->paginate(6);
         $categories = Category::all();
 
         return view('pages.blog.showByTag', [
             'posts' => $posts,
-            'categories' => $categories
+            'categories' => $categories,
+            'menuActive' => "",
         ]);
     }
 
     public function showByUser($user)
     {
         $user = User::where('name', $user)->first();
-        $posts = $user->posts()->paginate(6);
+        $posts = $user->posts()->where('status', 1)->paginate(6);
         $categories = Category::all();
 
         return view('pages.blog.showByUser', [
             'posts' => $posts,
-            'categories' => $categories
+            'categories' => $categories,
+            'menuActive' => "",
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $posts = Post::where('title', 'LIKE', '%' . $request->keyword . '%')->where('status', 1)->get();
+        $categories = Category::all();
+
+        $message = "";
+
+        if ($posts->isEmpty()) {
+            $message = "Kata kunci '<b>" . $request->keyword . "</b>' tidak ditemukan";
+        }
+
+        return view('pages.blog.showSearch', [
+            'posts' => $posts,
+            'categories' => $categories,
+            'menuActive' => "",
+            'messageResult' => $message,
+        ]);
+    }
+
+    public function showPreview($user, $id, $slug)
+    {
+        $post = Post::find($id);
+        $categories = Category::all();
+
+        return view('pages.blog.showPreviewPost', [
+            'post' => $post,
+            'categories' => $categories,
+            'menuActive' => "",
         ]);
     }
 }

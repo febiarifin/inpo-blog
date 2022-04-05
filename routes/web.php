@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use App\Models\Post;
 use League\CommonMark\Parser\Block\BlockContinue;
 
@@ -29,34 +30,44 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/posts', [PostController::class, 'index'])->name('posts');
 
-Route::get('/post-create', [PostController::class, 'create']);
+Route::get('/post-create', [PostController::class, 'create'])->middleware('isBanned');
 
-Route::post('/post-edit', [PostController::class, 'edit']);
+Route::post('/post-edit', [PostController::class, 'edit'])->middleware('isBanned');
 
-Route::post('/post-posting', [PostController::class, 'posting']);
+Route::post('/post-posting', [PostController::class, 'posting'])->middleware('isBanned');
 
-Route::post('/post-draft', [PostController::class, 'draft']);
+Route::post('/post-draft', [PostController::class, 'draft'])->middleware('isBanned');
 
 Route::post('/post-delete', [PostController::class, 'destroy']);
 
-Route::post('/post-store', [PostController::class, 'store']);
+Route::post('/post-store', [PostController::class, 'store'])->middleware('isBanned');
 
-Route::post('/post-update', [PostController::class, 'update']);
+Route::post('/post-update', [PostController::class, 'update'])->middleware('isBanned');
 
-Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories')->middleware('admin');
 
-Route::post('/category-delete', [CategoryController::class, 'destroy']);
+Route::post('/category-delete', [CategoryController::class, 'destroy'])->middleware('admin');
 
-Route::post('/category-create', [CategoryController::class, 'store']);
+Route::post('/category-create', [CategoryController::class, 'store'])->middleware('admin');
 
-Route::post('/category-edit', [CategoryController::class, 'edit']);
+Route::post('/category-edit', [CategoryController::class, 'edit'])->middleware('admin');
 
-Route::post('/category-update', [CategoryController::class, 'update']);
+Route::post('/category-update', [CategoryController::class, 'update'])->middleware('admin');
 
 Route::get('/post/{user}/{post_id}/{slug}', [BlogController::class, 'showPost']);
+
+Route::get('/preview/{user}/{post_id}/{slug}', [BlogController::class, 'showPreview'])->middleware('auth');
 
 Route::get('/category/{category}', [BlogController::class, 'showByCategory']);
 
 Route::get('/tag/{tag}', [BlogController::class, 'showByTag']);
 
 Route::get('/user/{user}', [BlogController::class, 'showByUser']);
+
+Route::post('/search', [BlogController::class, 'search']);
+
+Route::get('/users', [UserController::class, 'index'])->name('users')->middleware('admin');
+
+Route::post('/user-banned', [UserController::class, 'userBanned'])->middleware('admin');
+
+Route::post('/user-activate', [UserController::class, 'userActivate'])->middleware('admin');

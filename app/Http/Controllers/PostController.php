@@ -30,7 +30,7 @@ class PostController extends Controller
             'buttonDashboard' => '',
             'buttonPosts' => 'active',
             'buttonCategory' => '',
-            'buttonSetting' => '',
+            'buttonUser' => '',
             'no' => 1,
             'posts' => $posts,
         ]);
@@ -46,7 +46,7 @@ class PostController extends Controller
             'buttonDashboard' => '',
             'buttonPosts' => 'active',
             'buttonCategory' => '',
-            'buttonSetting' => '',
+            'buttonUser' => '',
             'categories' => $categories,
         ]);
     }
@@ -109,7 +109,7 @@ class PostController extends Controller
             'buttonDashboard' => '',
             'buttonPosts' => 'active',
             'buttonCategory' => '',
-            'buttonSetting' => '',
+            'buttonUser' => '',
             'no' => 1,
             'post' => $post,
             'categories' => $categories,
@@ -122,7 +122,7 @@ class PostController extends Controller
         $post = Post::findOrFail($request->id);
 
         if ($post->user_id !== Auth::user()->id) {
-            Alert::toast('Kamu tidak memiliki akses untuk mengedit artikel', 'error');
+            abort(403);
         }
 
         Validator::make($request->all(), [
@@ -172,11 +172,12 @@ class PostController extends Controller
         $post = Post::find($request->id);
 
         if ($post->user_id !== Auth::user()->id) {
-            Alert::toast('Kamu tidak memiliki akses untuk mengedit artikel', 'error');
-        } else {
-            $post->update(['status' => 1, 'published_at' => now()]);
-            Alert::toast('Artikel berhasil diedit', 'success');
+            abort(403);
         }
+
+        $post->update(['status' => 1, 'published_at' => now()]);
+        Alert::toast('Artikel berhasil diedit', 'success');
+
         return redirect('/posts');
     }
 
@@ -185,11 +186,12 @@ class PostController extends Controller
         $post = Post::find($request->id);
 
         if ($post->user_id !== Auth::user()->id) {
-            Alert::toast('Kamu tidak memiliki akses untuk mengedit artikel', 'error');
-        } else {
-            $post->update(['status' => 0]);
-            Alert::toast('Artikel berhasil diedit', 'success');
+            abort(403);
         }
+
+        $post->update(['status' => 0]);
+        Alert::toast('Artikel berhasil diedit', 'success');
+
         return redirect('/posts');
     }
 
@@ -198,14 +200,15 @@ class PostController extends Controller
         $post = Post::find($request->id);
 
         if ($post->user_id !== Auth::user()->id) {
-            Alert::toast('Kamu tidak memiliki akses untuk menghapus artikel', 'error');
-        } else {
-            $post->delete();
-            $post->untag();
-            DB::table('category_post')->where('post_id', $post->id)->delete();
-            Storage::delete($post->image);
-            Alert::toast('Artikel berhasil dihapus', 'success');
+            abort(403);
         }
+
+        $post->delete();
+        $post->untag();
+        DB::table('category_post')->where('post_id', $post->id)->delete();
+        Storage::delete($post->image);
+        Alert::toast('Artikel berhasil dihapus', 'success');
+
         return redirect('/posts');
     }
 }

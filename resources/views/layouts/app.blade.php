@@ -87,18 +87,18 @@
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ $buttonSetting }}">
-                        <a class="sidebar-link" href="">
-                            <i class="align-middle" data-feather="settings"></i> <span
-                                class="align-middle">Pengaturan</span>
+                    <li class="sidebar-item {{ $buttonUser }}">
+                        <a class="sidebar-link" href="{{ route('users') }}">
+                            <i class="align-middle" data-feather="users"></i> <span class="align-middle">Manajemen
+                                User</span>
                         </a>
                     </li>
                     @endif
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="/">
-                            <i class="align-middle" data-feather="eye"></i> <span class="align-middle">Lihat
-                                Blog</span>
+
+                        <a class="sidebar-link" href="{{ url('/') }}">
+                            <i class="align-middle" data-feather="eye"></i> <span class="align-middle">Lihat Blog</span>
                         </a>
                     </li>
 
@@ -141,19 +141,17 @@
                         @endif
                         @else
                         <li class="nav-item dropdown">
-                            <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#"
-                                data-bs-toggle="dropdown">
-                                <i class="align-middle" data-feather="settings"></i>
-                            </a>
 
-                            <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#"
-                                data-bs-toggle="dropdown">
-                                <span class="text-dark">{{ Auth::user()->name }}</span>
+                            <a class="nav-link d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+                                <span class="text-dark">
+                                    {{ Auth::user()->name}}
+                                    <i class="fa-solid fa-caret-down"></i>
+                                </span>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href=">
-                                    <i class=" align-middle me-1" data-feather="user"></i> Profile
+                                <a class="dropdown-item" href="">
+                                    <i class=" fa-solid fa-user"></i> Profile
                                 </a>
 
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();

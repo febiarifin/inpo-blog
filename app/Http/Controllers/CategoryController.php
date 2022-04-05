@@ -22,10 +22,6 @@ class CategoryController extends Controller
 
     public function index()
     {
-        if (Auth::user()->role !== 1) {
-            return redirect('/home');
-        }
-
         $categories = Category::paginate(10);
 
         return view('pages.category.categories', [
@@ -33,7 +29,7 @@ class CategoryController extends Controller
             'buttonDashboard' => '',
             'buttonPosts' => '',
             'buttonCategory' => 'active',
-            'buttonSetting' => '',
+            'buttonUser' => '',
             'no' => 1,
             'categories' => $categories,
             'form' => 'category-create',
@@ -45,11 +41,6 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        if (Auth::user()->role !== 1) {
-            Alert::toast('Kamu tidak memiliki akses untuk menambah kategori', 'error');
-            return back();
-        }
-
         Validator::make($request->all(), [
             'name' => [
                 'required',
@@ -81,7 +72,7 @@ class CategoryController extends Controller
             'buttonDashboard' => '',
             'buttonPosts' => '',
             'buttonCategory' => 'active',
-            'buttonSetting' => '',
+            'buttonUser' => '',
             'no' => 1,
             'categories' => $categories,
             'form' => 'category-update',
@@ -94,11 +85,6 @@ class CategoryController extends Controller
     public function update(Request $request)
     {
         $category = Category::findOrFail($request->id);
-
-        if (Auth::user()->role !== 1) {
-            Alert::toast('Kamu tidak memiliki akses untuk mengedit kategori', 'error');
-            return back();
-        }
 
         $params = $request->all();
         $params['name'] = $params['name'];

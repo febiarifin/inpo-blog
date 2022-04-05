@@ -29,7 +29,7 @@ class PostFactory extends Factory
             'image' => $this->faker->imageUrl(640, 480),
             'status' => 1,
             'published_at' => date('Y-m-d H:i:s'),
-            'user_id' => 1
+            'user_id' => 5
         ];
     }
 }

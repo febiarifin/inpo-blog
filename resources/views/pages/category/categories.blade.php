@@ -46,15 +46,16 @@
                                     @csrf
                                     <input type="hidden" name="id" value="{{$category->id}}">
                                     <input type="hidden" name="name" value="{{$category->name}}">
-                                    <button class="btn btn-primary btn-sm" type="submit">Edit</button>
+                                    <button class="btn btn-primary btn-sm" type="submit"><i
+                                            class="fa-solid fa-pen-to-square"></i></button>
                                 </form>
 
                                 <form action="category-delete" method="post">
                                     @method('post')
                                     @csrf
                                     <input type="hidden" name="id" value="{{$category->id}}">
-                                    <button class="btn btn-danger btn-sm" type="submit"
-                                        onclick="confirmDelete()">Hapus</button>
+                                    <button class="btn btn-danger btn-sm" type="submit" onclick="confirmDelete()"><i
+                                            class="fa-solid fa-trash-can"></i></button>
                                 </form>
 
                             </div>

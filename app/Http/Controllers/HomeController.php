@@ -28,7 +28,7 @@ class HomeController extends Controller
             'buttonDashboard' => 'active',
             'buttonPosts' => '',
             'buttonCategory' => '',
-            'buttonSetting' => '',
+            'buttonUser' => '',
         ]);
     }
 }
