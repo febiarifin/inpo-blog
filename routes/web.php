@@ -21,9 +21,7 @@ use League\CommonMark\Parser\Block\BlockContinue;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [BlogController::class, 'index']);
 
 Auth::routes();
 
@@ -54,3 +52,11 @@ Route::post('/category-create', [CategoryController::class, 'store']);
 Route::post('/category-edit', [CategoryController::class, 'edit']);
 
 Route::post('/category-update', [CategoryController::class, 'update']);
+
+Route::get('/post/{user}/{post_id}/{slug}', [BlogController::class, 'showPost']);
+
+Route::get('/category/{category}', [BlogController::class, 'showByCategory']);
+
+Route::get('/tag/{tag}', [BlogController::class, 'showByTag']);
+
+Route::get('/user/{user}', [BlogController::class, 'showByUser']);

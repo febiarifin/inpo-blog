@@ -23,7 +23,7 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::orderBy('created_at', 'DESC')->where('user_id', Auth::user()->id)->get();
+        $posts = Post::orderBy('created_at', 'DESC')->where('user_id', Auth::user()->id)->paginate(10);
 
         return view('pages.post.posts', [
             'pages' => 'Manajemen Artikel',
@@ -121,7 +121,7 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($request->id);
 
-        if ($post->user_id != Auth::user()->id) {
+        if ($post->user_id !== Auth::user()->id) {
             Alert::toast('Kamu tidak memiliki akses untuk mengedit artikel', 'error');
         }
 
@@ -171,7 +171,7 @@ class PostController extends Controller
     {
         $post = Post::find($request->id);
 
-        if ($post->user_id != Auth::user()->id) {
+        if ($post->user_id !== Auth::user()->id) {
             Alert::toast('Kamu tidak memiliki akses untuk mengedit artikel', 'error');
         } else {
             $post->update(['status' => 1, 'published_at' => now()]);
@@ -184,7 +184,7 @@ class PostController extends Controller
     {
         $post = Post::find($request->id);
 
-        if ($post->user_id != Auth::user()->id) {
+        if ($post->user_id !== Auth::user()->id) {
             Alert::toast('Kamu tidak memiliki akses untuk mengedit artikel', 'error');
         } else {
             $post->update(['status' => 0]);
@@ -197,7 +197,7 @@ class PostController extends Controller
     {
         $post = Post::find($request->id);
 
-        if ($post->user_id != Auth::user()->id) {
+        if ($post->user_id !== Auth::user()->id) {
             Alert::toast('Kamu tidak memiliki akses untuk menghapus artikel', 'error');
         } else {
             $post->delete();

@@ -22,7 +22,8 @@
                     @foreach ($posts as $post)
                     <tr>
                         <td>{{ $no++ }}</td>
-                        <td><a href="" class="link-primary">{{ Str::substr($post->title,0,100)}}</a></td>
+                        <td><a href="{{ url('post/'.$post->user->name.'/'.$post->id.'/'.$post->slug) }}"
+                                class="link-primary">{{ Str::substr($post->title,0,50)}}</a></td>
                         <td>{{ $post->published_at }}</td>
                         <td>
                             @if ( $post->status == 1)
@@ -75,6 +76,7 @@
             </div>
         </div>
     </div>
+    {{ $posts->links() }}
 </main>
 
 <script type="text/javascript">

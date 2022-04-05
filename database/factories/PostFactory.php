@@ -20,13 +20,13 @@ class PostFactory extends Factory
      */
     public function definition()
     {
-        $user = User::factory()->create();
+        // $user = User::factory()->create();
         $title = $this->faker->sentence();
         return [
             'title' => $title,
             'slug' => Str::slug($title),
             'content' => $this->faker->paragraph(),
-            'image_url' => $this->faker->imageUrl(640, 480),
+            'image' => $this->faker->imageUrl(640, 480),
             'status' => 1,
             'published_at' => date('Y-m-d H:i:s'),
             'user_id' => 1

@@ -67,6 +67,7 @@
         </div>
     </div>
 
+    {{$categories->links()}}
 </main>
 
 

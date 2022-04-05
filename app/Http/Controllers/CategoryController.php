@@ -22,7 +22,11 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = Category::all();
+        if (Auth::user()->role !== 1) {
+            return redirect('/home');
+        }
+
+        $categories = Category::paginate(10);
 
         return view('pages.category.categories', [
             'pages' => 'Manajemen Kategori',
@@ -41,7 +45,7 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        if (Auth::user()->role != 1) {
+        if (Auth::user()->role !== 1) {
             Alert::toast('Kamu tidak memiliki akses untuk menambah kategori', 'error');
             return back();
         }
@@ -91,7 +95,7 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($request->id);
 
-        if (Auth::user()->role != 1) {
+        if (Auth::user()->role !== 1) {
             Alert::toast('Kamu tidak memiliki akses untuk mengedit kategori', 'error');
             return back();
         }
@@ -115,7 +119,7 @@ class CategoryController extends Controller
     {
         $category = Category::find($request->id);
 
-        if (Auth::user()->role != 1) {
+        if (Auth::user()->role !== 1) {
             Alert::toast('Kamu tidak memiliki akses untuk menghapus kategori', 'error');
         } else {
             if ($category->posts()->exists()) {

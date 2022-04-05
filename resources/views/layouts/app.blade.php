@@ -22,6 +22,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('adminkit/css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <!--SweetAlert 2-->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -55,7 +56,7 @@
         @auth
         <nav id="sidebar" class="sidebar js-sidebar">
             <div class="sidebar-content js-simplebar">
-                <a class="sidebar-brand" href="index.html">
+                <a class="sidebar-brand" href="/home">
                     <span class="align-middle"> {{ config('app.name', 'Laravel') }}</span>
                 </a>
 
@@ -151,8 +152,8 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="pages-profile.html">
-                                    <i class="align-middle me-1" data-feather="user"></i> Profile
+                                <a class="dropdown-item" href=">
+                                    <i class=" align-middle me-1" data-feather="user"></i> Profile
                                 </a>
 
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -164,6 +165,7 @@
                                     @csrf
                                 </form>
                             </div>
+                        </li>
                         </li>
                         @endguest
 
