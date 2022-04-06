@@ -2,7 +2,7 @@
 
 @section('content')
 
-{{-- Related Post --}}
+{{-- Post --}}
 <div class="row gy-5 rows-cols-3">
 
     @foreach ($posts as $post)

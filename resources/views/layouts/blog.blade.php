@@ -106,18 +106,6 @@
         </div>
     </nav>
 
-    <div class="container mt-5 mb-5">
-
-        @yield('content')
-
-    </div>
-
-    <div class="container text-center p-3">
-        <p>{{ config('app.name', 'Laravel') }} &copy 2022 </p>
-        <a href="https://github.com/febiarifin/inpo-blog">Source code on Github
-            <i class="fa-brands fa-github"></i></a>
-    </div>
-
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -138,6 +126,20 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="container mt-5 mb-5">
+
+        @yield('content')
+
+    </div>
+
+    <div class="text-center bg-white p-4">
+        {{ config('app.name', 'Laravel') }} &copy 2022
+        by <a href="https://github.com/febiarifin">febiarifin <i class="fa-solid fa-heart"></i></a>
+        <a href="https://github.com/febiarifin/inpo-blog">Github <i class="fa-brands fa-github"></i></a>
+        <br>for business / recruiting purposes? Contact Me on
+        <a href="mailto:febiarifin0@gmail.com">febiarifim0@gmail.com <i class="fa-brands fa-email"></i></a>
     </div>
 
 

@@ -2,19 +2,20 @@
 
 @section('content')
 <div class="card bg-white container-show-post">
-    <p class="fs-5">
+    {{-- <p class="fs-5">
         <a href="/" class="link-post">Post</a>/
         <a href="{{ url('user/'.$post->user->name) }}" class="link-post">{{$post->user->name }}</a>/
         {{$post->slug}}
-    </p>
+    </p> --}}
 
     <div class="mb-3">
         <img src="{{ asset($post->image) }}" class="img-fluid" alt="{{ $post->slug }}">
     </div>
 
-    <p class="mb-3">Oleh <a href="{{ url('user/'.$post->user->name) }}" class="link-post">{{ $post->user->name }}</a>,
+    {{-- <p class="mb-3">Oleh <a href="{{ url('user/'.$post->user->name) }}" class="link-post">{{ $post->user->name
+            }}</a>,
         Published On {{ $post->published_at
-        }}</p>
+        }}</p> --}}
 
     <p class="h1 mb-5 mt-3">{{ $post->title }}</p>
 

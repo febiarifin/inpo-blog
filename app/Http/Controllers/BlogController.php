@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
+use Exception;
 use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,26 +28,32 @@ class BlogController extends Controller
 
     public function showPost($user, $id, $slug)
     {
-        $user = User::where('name', $user)->first();
+        try {
+            $user = User::where('name', $user)->first();
+            $post = Post::where('id', $id)->where('slug', $slug)->where('user_id', $user->id)->where('status', 1)->first();
+            $relatedPosts = Post::inRandomOrder()->limit(6)->get();
 
-        $post = Post::where('id', $id)->where('slug', $slug)->where('user_id', $user->id)->where('status', 1)->first();
+            if (!$post) {
+                abort(403);
+            }
 
-        if (!$post) {
+            $categories = Category::all();
+
+            $next = Post::where('id', '>', $post->id)->orderBy('id')->first();
+            $previous = Post::where('id', '<', $post->id)->orderBy('id', 'desc')->first();
+
+            return view('pages.blog.showPost', [
+                'post' => $post,
+                'categories' => $categories,
+                'next' => $next,
+                'previous' => $previous,
+                'menuActive' => "",
+                'relatedPosts' => $relatedPosts,
+            ]);
+        } catch (Exception  $e) {
+            report($e);
             abort(403);
         }
-
-        $categories = Category::all();
-
-        $next = Post::where('id', '>', $post->id)->orderBy('id')->first();
-        $previous = Post::where('id', '<', $post->id)->orderBy('id', 'desc')->first();
-
-        return view('pages.blog.showPost', [
-            'post' => $post,
-            'categories' => $categories,
-            'next' => $next,
-            'previous' => $previous,
-            'menuActive' => "",
-        ]);
     }
 
     public function showByCategory($categorySlug)
@@ -108,13 +115,23 @@ class BlogController extends Controller
 
     public function showPreview($user, $id, $slug)
     {
-        $post = Post::find($id);
-        $categories = Category::all();
+        try {
+            $user = User::where('name', $user)->first();
+            $post = Post::where('id', $id)->where('slug', $slug)->where('user_id', $user->id)->first();
+            $categories = Category::all();
 
-        return view('pages.blog.showPreviewPost', [
-            'post' => $post,
-            'categories' => $categories,
-            'menuActive' => "",
-        ]);
+            if (!$post) {
+                abort(403);
+            }
+
+            return view('pages.blog.showPreviewPost', [
+                'post' => $post,
+                'categories' => $categories,
+                'menuActive' => "",
+            ]);
+        } catch (Exception $e) {
+            report($e);
+            abort(403);
+        }
     }
 }

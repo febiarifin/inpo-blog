@@ -4,8 +4,12 @@
 <div class="card bg-white container-show-post">
     <p class="fs-5">
         <a href="/" class="link-post">Post</a>/
-        <a href="{{ url('user/'.$post->user->name) }}" class="link-post">{{$post->user->name }}</a>/
-        {{$post->slug}}
+        @foreach ($post->categories as $category)
+        <a href="{{ url('category/'.$category->slug) }}" class="link-post">{{$category->name}}</a>
+        @endforeach
+        /
+        {{-- <a href="{{ url('user/'.$post->user->name) }}" class="link-post">{{$post->user->name }}</a>/ --}}
+        <a href="#" class="link-post">{{$post->slug}}</a>
     </p>
 
     <div class="mb-3">
@@ -33,7 +37,7 @@
 
 </div>
 
-<div class="container mt-5">
+<div class="mt-5">
     <div class="row row-cols-2">
         <div class="col-6">
             @if (isset($previous))
@@ -54,6 +58,59 @@
     <div id="disqus_thread"></div>
 </div>
 
+{{-- Related Posts --}}
+
+<div class="mt-5">
+    <div class="p-1 bg-white text-center">
+        <p class="fs-4 mt-3">Related Post</p>
+    </div>
+
+    <div class="row gy-5 rows-cols-3 mt-3">
+
+        @foreach ($relatedPosts as $post)
+        <div class="col">
+            <div class="card bg-white" style="width: 20rem;">
+                <img src="{{ asset($post->image) }}" class="card-img-top" alt="Image post">
+                <div class="card-body">
+
+                    @foreach ($post->categories as $category)
+                    <span class="badge-category">
+                        <a href="{{ url('category/'.$category->slug) }}">{{$category->name}}</a>
+                    </span>
+                    @endforeach
+
+                    <h5 class="card-title">
+                        <a href="{{ url('post/'.$post->user->name.'/'.$post->id.'/'.$post->slug) }}"
+                            class="link-post">{{
+                            Str::substr($post->title,0,50) }}</a>
+                    </h5>
+
+                    <p class="text-secondary">
+                        <a href="{{ url('user/'.$post->user->name) }}" class="text-secondary link-post">
+                            {{ $post->user->name }}
+                        </a>,
+                        {{ $post->published_at}}
+                    </p>
+
+                    @foreach ($post->tags as $tag)
+                    <a href="{{ url('tag/'.$tag->slug) }}" class="badge bg-light text-secondary link-post">
+                        {{ $tag->name }}
+                    </a>
+                    @endforeach
+
+                    <div class="mt-4">
+                        <a href="{{ url('post/'.$post->user->name.'/'.$post->id.'/'.$post->slug) }}"
+                            class="text-primary">Baca
+                            selengkapnya</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
+</div>
+
+{{-- Js --}}
 <script id="dsq-count-scr" src="//inpo-blog.disqus.com/count.js" async></script>
 <script>
     (function() {

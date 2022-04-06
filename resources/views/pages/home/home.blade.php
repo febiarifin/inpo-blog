@@ -4,151 +4,155 @@
 <main class="content">
     <div class="container-fluid p-0">
 
+        @if (Auth::user()->role ===2)
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Perhatian ! </strong> Akun anda dibanned oleh admin karena pelanggaran ketentuan.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+
         <h1 class="h3 mb-3">{{$pages}}</h1>
 
         <div class="row">
-            <div class="col-xl-6 col-xxl-5 d-flex">
+            <div class="col-xl-12 col-xxl-5 d-flex">
                 <div class="w-100">
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-3">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col mt-0">
-                                            <h5 class="card-title">Sales</h5>
+                                            <h5 class="card-title">Artikel</h5>
                                         </div>
 
                                         <div class="col-auto">
                                             <div class="stat text-primary">
-                                                <i class="align-middle" data-feather="truck"></i>
+                                                <i class="align-middle" data-feather="folder"></i>
                                             </div>
                                         </div>
                                     </div>
-                                    <h1 class="mt-1 mb-3">2.382</h1>
-                                    <div class="mb-0">
-                                        <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65%
-                                        </span>
-                                        <span class="text-muted">Since last week</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col mt-0">
-                                            <h5 class="card-title">Visitors</h5>
-                                        </div>
 
-                                        <div class="col-auto">
-                                            <div class="stat text-primary">
-                                                <i class="align-middle" data-feather="users"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <h1 class="mt-1 mb-3">14.212</h1>
-                                    <div class="mb-0">
-                                        <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 5.25%
-                                        </span>
-                                        <span class="text-muted">Since last week</span>
-                                    </div>
+                                    <h1 class="mt-1 mb-3">{{$postCount}}</h1>
+
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6">
+
+                        <div class="col-sm-3">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col mt-0">
-                                            <h5 class="card-title">Earnings</h5>
+                                            <h5 class="card-title">Posting</h5>
                                         </div>
 
                                         <div class="col-auto">
                                             <div class="stat text-primary">
-                                                <i class="align-middle" data-feather="dollar-sign"></i>
+                                                <i class="align-middle" data-feather="upload"></i>
                                             </div>
                                         </div>
                                     </div>
-                                    <h1 class="mt-1 mb-3">$21.300</h1>
-                                    <div class="mb-0">
-                                        <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65%
-                                        </span>
-                                        <span class="text-muted">Since last week</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col mt-0">
-                                            <h5 class="card-title">Orders</h5>
-                                        </div>
 
-                                        <div class="col-auto">
-                                            <div class="stat text-primary">
-                                                <i class="align-middle" data-feather="shopping-cart"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <h1 class="mt-1 mb-3">64</h1>
-                                    <div class="mb-0">
-                                        <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -2.25%
-                                        </span>
-                                        <span class="text-muted">Since last week</span>
-                                    </div>
+                                    <h1 class="mt-1 mb-3">{{$postPostingCount}}</h1>
+
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="col-xl-6 col-xxl-7">
-                <div class="card flex-fill w-100">
-                    <div class="card-header">
+                        <div class="col-sm-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col mt-0">
+                                            <h5 class="card-title">Draft</h5>
+                                        </div>
 
-                        <h5 class="card-title mb-0">Recent Movement</h5>
-                    </div>
-                    <div class="card-body py-3">
-                        <div class="chart chart-sm">
-                            <canvas id="chartjs-dashboard-line"></canvas>
+                                        <div class="col-auto">
+                                            <div class="stat text-primary">
+                                                <i class="align-middle" data-feather="bookmark"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <h1 class="mt-1 mb-3">{{$postDraftCount}}</h1>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col mt-0">
+                                            <h5 class="card-title">Status</h5>
+                                        </div>
+
+                                        <div class="col-auto">
+                                            <div class="stat text-primary">
+                                                <i class="align-middle" data-feather="check-circle"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <h2 class="mt-1 mb-3">
+                                        @if ($status === 0)
+                                        <span class="badge bg-success">Active</span>
+                                        @elseif($status === 1)
+                                        <span class="badge bg-primary">Admin</span>
+                                        @elseif($status === 2)
+                                        <span class="badge bg-danger">Banned</span>
+                                        @endif
+                                        </h3>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
 
         <div class="row">
             <div class="col-12 col-md-6 col-xxl-3 d-flex order-2 order-xxl-3">
                 <div class="card flex-fill w-100">
                     <div class="card-header">
-
-                        <h5 class="card-title mb-0">Browser Usage</h5>
+                        <h5 class="card-title mb-0">Artikel Terbaru</h5>
                     </div>
-                    <div class="card-body d-flex">
-                        <div class="align-self-center w-100">
-                            <div class="py-3">
-                                <div class="chart chart-xs">
-                                    <canvas id="chartjs-dashboard-pie"></canvas>
+                    <div class="card-body">
+                        @if ($message !== '')
+                        <div class="text-secondary text-center fs-4 text-uppercase">
+                            {{$message}}
+                        </div>
+                        @endif
+
+                        @foreach ($latestPost as $post)
+                        <div class="card mb-3" style="max-width: 540px;">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="{{ asset($post->image) }}" class="img-fluid rounded-start"
+                                        alt="Image post">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <a href="{{ url('post/'.Auth::user()->name.'/'.$post->id.'/'.$post->slug) }}"
+                                                class="link-secondary">
+                                                {{Str::substr($post->title,0,30) }}...
+                                            </a>
+                                        </h5>
+                                        <p class="card-text">
+                                            {{ Str::substr($post->content,5,35) }}...
+                                            <br>
+                                            <small class="text-muted">Published on {{ $post->published_at }}</small>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-
-                            <table class="table mb-0">
-                                <tbody>
-                                    <tr>
-                                        <td>Chrome</td>
-                                        <td class="text-end">4306</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Firefox</td>
-                                        <td class="text-end">3801</td>
-                                    </tr>
-                                    <tr>
-                                        <td>IE</td>
-                                        <td class="text-end">1689</td>
-                                    </tr>
-                                </tbody>
-                            </table>
                         </div>
+                        @endforeach
+
                     </div>
                 </div>
             </div>
@@ -156,7 +160,7 @@
                 <div class="card flex-fill w-100">
                     <div class="card-header">
 
-                        <h5 class="card-title mb-0">Real-Time</h5>
+                        <h5 class="card-title mb-0">Views</h5>
                     </div>
                     <div class="card-body px-4">
                         <div id="world_map" style="height:350px;"></div>
@@ -167,7 +171,7 @@
                 <div class="card flex-fill">
                     <div class="card-header">
 
-                        <h5 class="card-title mb-0">Calendar</h5>
+                        <h5 class="card-title mb-0">Kalender</h5>
                     </div>
                     <div class="card-body d-flex">
                         <div class="align-self-center w-100">
@@ -180,99 +184,19 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-12 col-lg-8 col-xxl-9 d-flex">
-                <div class="card flex-fill">
-                    <div class="card-header">
-
-                        <h5 class="card-title mb-0">Latest Projects</h5>
-                    </div>
-                    <table class="table table-hover my-0">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th class="d-none d-xl-table-cell">Start Date</th>
-                                <th class="d-none d-xl-table-cell">End Date</th>
-                                <th>Status</th>
-                                <th class="d-none d-md-table-cell">Assignee</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Project Apollo</td>
-                                <td class="d-none d-xl-table-cell">01/01/2021</td>
-                                <td class="d-none d-xl-table-cell">31/06/2021</td>
-                                <td><span class="badge bg-success">Done</span></td>
-                                <td class="d-none d-md-table-cell">Vanessa Tucker</td>
-                            </tr>
-                            <tr>
-                                <td>Project Fireball</td>
-                                <td class="d-none d-xl-table-cell">01/01/2021</td>
-                                <td class="d-none d-xl-table-cell">31/06/2021</td>
-                                <td><span class="badge bg-danger">Cancelled</span></td>
-                                <td class="d-none d-md-table-cell">William Harris</td>
-                            </tr>
-                            <tr>
-                                <td>Project Hades</td>
-                                <td class="d-none d-xl-table-cell">01/01/2021</td>
-                                <td class="d-none d-xl-table-cell">31/06/2021</td>
-                                <td><span class="badge bg-success">Done</span></td>
-                                <td class="d-none d-md-table-cell">Sharon Lessman</td>
-                            </tr>
-                            <tr>
-                                <td>Project Nitro</td>
-                                <td class="d-none d-xl-table-cell">01/01/2021</td>
-                                <td class="d-none d-xl-table-cell">31/06/2021</td>
-                                <td><span class="badge bg-warning">In progress</span></td>
-                                <td class="d-none d-md-table-cell">Vanessa Tucker</td>
-                            </tr>
-                            <tr>
-                                <td>Project Phoenix</td>
-                                <td class="d-none d-xl-table-cell">01/01/2021</td>
-                                <td class="d-none d-xl-table-cell">31/06/2021</td>
-                                <td><span class="badge bg-success">Done</span></td>
-                                <td class="d-none d-md-table-cell">William Harris</td>
-                            </tr>
-                            <tr>
-                                <td>Project X</td>
-                                <td class="d-none d-xl-table-cell">01/01/2021</td>
-                                <td class="d-none d-xl-table-cell">31/06/2021</td>
-                                <td><span class="badge bg-success">Done</span></td>
-                                <td class="d-none d-md-table-cell">Sharon Lessman</td>
-                            </tr>
-                            <tr>
-                                <td>Project Romeo</td>
-                                <td class="d-none d-xl-table-cell">01/01/2021</td>
-                                <td class="d-none d-xl-table-cell">31/06/2021</td>
-                                <td><span class="badge bg-success">Done</span></td>
-                                <td class="d-none d-md-table-cell">Christina Mason</td>
-                            </tr>
-                            <tr>
-                                <td>Project Wombat</td>
-                                <td class="d-none d-xl-table-cell">01/01/2021</td>
-                                <td class="d-none d-xl-table-cell">31/06/2021</td>
-                                <td><span class="badge bg-warning">In progress</span></td>
-                                <td class="d-none d-md-table-cell">William Harris</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="col-12 col-lg-4 col-xxl-3 d-flex">
-                <div class="card flex-fill w-100">
-                    <div class="card-header">
-
-                        <h5 class="card-title mb-0">Monthly Sales</h5>
-                    </div>
-                    <div class="card-body d-flex w-100">
-                        <div class="align-self-center chart chart-lg">
-                            <canvas id="chartjs-dashboard-bar"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
 </main>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var date = new Date(Date.now() - 5 * 24 * 60 * 60 * 1000);
+        var defaultDate = date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
+        document.getElementById("datetimepicker-dashboard").flatpickr({
+            inline: true,
+            prevArrow: "<span title=\"Previous month\">&laquo;</span>",
+            nextArrow: "<span title=\"Next month\">&raquo;</span>",
+            defaultDate: defaultDate
+        });
+    });
+</script>
 @endsection
