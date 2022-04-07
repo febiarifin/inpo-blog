@@ -34,6 +34,7 @@
     <!-- Bootstrap Tags Input CDN -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css"
         rel="stylesheet" />
+
     <style>
         .bootstrap-tagsinput .tag {
             margin-right: 2px;
@@ -191,6 +192,7 @@
 
     <script src="{{asset('js/app.js')}}"></script>
     <script src="{{ asset('adminkit/js/app.js') }}"></script>
+
     {{-- Bootstrap Tags Input CDN --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js"></script>

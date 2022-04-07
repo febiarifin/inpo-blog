@@ -26,7 +26,7 @@
     <div class="mt-5">
         Tags :
         @foreach ($post->tags as $tag)
-        <span class="badge bg-light text-dark fs-5">
+        <span class="badge bg-light text-dark fs-6">
             <a href="{{ url('tag/'.$tag->slug)}}" class="link-post">{{ $tag->name }}</a>
         </span>
         @endforeach

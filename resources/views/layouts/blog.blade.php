@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ $title }}</title>
 
     <!-- icons -->
     <link rel="shortcut icon" href="{{ asset('adminkit/img/icons/icon-48x48.png') }}" />
@@ -42,6 +42,30 @@
             color: #474747;
         }
 
+        #myBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: #2c3e50;
+            color: white;
+            cursor: pointer;
+            padding: 15px 20px 15px 20px;
+            border-radius: 50px;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        }
+
+        .box-related {
+            box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+        }
+
+        #myBtn:hover {
+            background-color: #243342;
+        }
+
         @media screen and (min-width: 600px) {
             .container-show-post {
                 padding: 100px 150px 100px 150px;
@@ -69,6 +93,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
+
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     @foreach ($categories as $category)
                     <li class="nav-item">
@@ -142,8 +167,26 @@
         <a href="mailto:febiarifin0@gmail.com">febiarifin0@gmail.com <i class="fa-brands fa-email"></i></a>
     </div>
 
+    <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa-solid fa-angle-up"></i></button>
 
     <script src="{{asset('js/app.js')}}"></script>
+
+    <script>
+        window.onscroll = function() {scrollFunction()};
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("myBtn").style.display = "block";
+            } else {
+                document.getElementById("myBtn").style.display = "none";
+
+            }
+        }
+         
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
 
 </body>
 

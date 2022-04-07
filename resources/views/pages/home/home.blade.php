@@ -146,8 +146,8 @@
                                             {{ Str::substr($post->content,5,35) }}...
                                             <br>
                                             <small class="text-muted">
-                                                <i class="fa-solid fa-clock"></i> {{ $post->published_at }},
-                                                <i class="fa-solid fa-eye"></i> {{ views($post)->count() }}
+                                                <i class="fa-solid fa-clock"></i> {{ $post->published_at }}
+                                                , <i class="fa-solid fa-eye"></i> {{ views($post)->count() }}
                                             </small>
                                         </p>
                                     </div>

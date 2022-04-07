@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="card bg-white container-show-post">
-    <p class="fs-5">
+    <p class="fs-6">
         <a href="/" class="link-post">Post</a>/
         @foreach ($post->categories as $category)
         <a href="{{ url('category/'.$category->slug) }}" class="link-post">{{$category->name}}</a>
@@ -33,7 +33,7 @@
     <div class="mt-5">
         Tags :
         @foreach ($post->tags as $tag)
-        <span class="badge bg-light text-dark fs-5">
+        <span class="badge bg-light text-dark fs-6">
             <a href="{{ url('tag/'.$tag->slug)}}" class="link-post">{{ $tag->name }}</a>
         </span>
         @endforeach
@@ -46,13 +46,16 @@
         <div class="col-6">
             @if (isset($previous))
             <a href="{{ url('post/'.$post->user->name.'/'.$previous->id.'/'.$previous->slug) }}"
-                class="btn btn-secondary form-control p-3 fs-4">{{ Str::substr($previous->title,0,20) }}</a>
+                class="btn btn-secondary form-control p-3 fs-5">
+                <i class="fa-solid fa-chevron-left float-start mt-1"></i> {{
+                Str::substr($previous->title,0,20) }}</a>
             @endif
         </div>
         <div class="col-6">
             @if (isset($next))
             <a href="{{ url('post/'.$post->user->name.'/'.$next->id.'/'.$next->slug) }}"
-                class="btn btn-secondary form-control p-3 fs-4">{{ Str::substr($next->title,0,20) }} </a>
+                class="btn btn-secondary form-control p-3 fs-5">
+                <i class="fa-solid fa-angle-right float-end mt-1"></i>{{ Str::substr($next->title,0,20) }} </a>
             @endif
         </div>
     </div>
@@ -65,7 +68,7 @@
 {{-- Related Posts --}}
 
 <div class="mt-5">
-    <div class="p-1 bg-white text-center">
+    <div class="p-1 bg-white text-center box-related">
         <p class="fs-4 mt-3">Related Post</p>
     </div>
 

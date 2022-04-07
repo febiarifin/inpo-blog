@@ -27,8 +27,8 @@
                     <a href="{{ url('user/'.$post->user->name) }}" class="text-secondary link-post">
                         {{ $post->user->name }}
                     </a>,
-                    <i class="fa-solid fa-clock"></i> {{ $post->published_at}},
-                    <i class="fa-solid fa-eye"></i> {{ views($post)->count() }}
+                    <i class="fa-solid fa-clock"></i> {{ $post->published_at}}
+                    {{-- , <i class="fa-solid fa-eye"></i> {{ views($post)->count() }} --}}
                 </p>
 
                 @foreach ($post->tags as $tag)

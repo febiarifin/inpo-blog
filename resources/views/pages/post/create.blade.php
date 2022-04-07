@@ -21,7 +21,7 @@
                         </div>
                     </div>
 
-                    <div class="card">
+                    <div class="card" style="max-height: 180px">
                         <div class="card-body">
                             <label for="">Kategori</label>
                             <select multiple class="form-control @error('categories') is-invalid @enderror"
@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="col-12 col-lg-6">
-                    <div class="card" style="height: 260px; max-height: 260px">
+                    <div class="card" style="height: 273px; max-height: 280px">
                         <div class="card-body">
                             <label for="">Gambar</label>
                             <input type="file" name="image" id="image"

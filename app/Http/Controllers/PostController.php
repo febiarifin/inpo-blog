@@ -23,7 +23,7 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::orderBy('created_at', 'DESC')->where('user_id', Auth::user()->id)->paginate(10);
+        $posts = Post::with('user')->orderBy('created_at', 'DESC')->where('user_id', Auth::user()->id)->paginate(10);
 
         return view('pages.post.posts', [
             'pages' => 'Manajemen Artikel',
@@ -53,55 +53,56 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        try {
-            Validator::make($request->all(), [
-                'title' => [
-                    'required',
-                    'string'
-                ],
-                'content' => [
-                    'string'
-                ],
-                'categories' => [
-                    'required',
-                    'array',
-                    'max:2'
-                ],
-                'image' => [
-                    'required',
-                    'mimes:jpg,jpeg,png,gif',
-                    'max:1024',
-                ],
-                'tags' => [
-                    'required'
-                ]
-            ])->validate();
+        // try {
+        Validator::make($request->all(), [
+            'title' => [
+                'required',
+                'string'
+            ],
+            'content' => [
+                'string'
+            ],
+            'categories' => [
+                'required',
+                'array',
+                'max:2'
+            ],
+            'image' => [
+                'required',
+                'mimes:jpg,jpeg,png,gif',
+                'max:1024',
+            ],
+            'tags' => [
+                'required'
+            ]
+        ])->validate();
 
-            $params = $request->all();
+        $params = $request->all();
 
-            $params['title'] = $params['title'];
-            $params['slug'] = Str::slug($params['title']);
-            $params['content'] = $params['content'];
-            $params['user_id'] = $request->user()->id;
-            $params['status'] = 0;
+        $params['title'] = $params['title'];
+        $params['slug'] = Str::slug($params['title']);
+        $params['content'] = $params['content'];
+        $params['user_id'] = $request->user()->id;
+        $params['status'] = 0;
 
-            if ($request->file('image')) {
-                $params['image'] = $request->file('image')->store('post-images');
-            }
-
-            $tags = explode(",", $params['tags']);
-
-            $post = Post::create($params);
-            $post->categories()->attach($params['categories']);
-            $post->tag($tags);
-
-            Alert::success('', 'Artikel berhasil disimpan');
-            return redirect('/posts');
-        } catch (Exception $e) {
-            report($e);
-            Alert::toast($e->getMessage(), 'error');
-            return redirect('/post-create');
+        if ($request->file('image')) {
+            $params['image'] = $request->file('image')->store('post-images');
         }
+
+        $tags = explode(",", $params['tags']);
+
+        $post = Post::create($params);
+        $post->categories()->attach($params['categories']);
+        $post->tag($tags);
+
+        Alert::success('', 'Artikel berhasil disimpan');
+        return redirect('/posts');
+
+        // } catch (Exception $e) {
+        //     report($e);
+        //     Alert::toast($e->getMessage(), 'error');
+        //     return redirect('/post-create');
+        // }
     }
 
     public function edit(Request $request)
@@ -125,58 +126,59 @@ class PostController extends Controller
 
     public function update(Request $request)
     {
-        try {
-            $post = Post::findOrFail($request->id);
+        // try {
+        $post = Post::findOrFail($request->id);
 
-            if ($post->user_id !== Auth::user()->id) {
-                abort(403);
-            }
-
-            Validator::make($request->all(), [
-                'title' => [
-                    'required',
-                    'string'
-                ],
-                'content' => [
-                    'string'
-                ],
-                'categories' => [
-                    'required',
-                    'array',
-                    'max:2'
-                ],
-                'tags' => [
-                    'required'
-                ]
-            ])->validate();
-
-            $params = $request->all();
-
-            $params['title'] = $params['title'];
-            $params['slug'] = Str::slug($params['title']);
-            $params['content'] = $params['content'];
-            $params['user_id'] = $request->user()->id;
-            $params['status'] = $params['status'];
-
-            if ($request->file('image')) {
-                Storage::delete($post->image);
-                $params['image'] = $request->file('image')->store('post-images');
-            }
-
-            $tags = explode(",", $params['tags']);
-
-            $post->update($params);
-            $post->categories()->sync($params['categories']);
-            $post->untag();
-            $post->tag($tags);
-
-            Alert::success('', 'Artikel berhasil diedit');
-            return redirect('/posts');
-        } catch (Exception $e) {
-            report($e);
-            Alert::toast($e->getMessage(), 'error');
-            return redirect('/posts');
+        if ($post->user_id !== Auth::user()->id) {
+            abort(403);
         }
+
+        Validator::make($request->all(), [
+            'title' => [
+                'required',
+                'string'
+            ],
+            'content' => [
+                'string'
+            ],
+            'categories' => [
+                'required',
+                'array',
+                'max:2'
+            ],
+            'tags' => [
+                'required'
+            ]
+        ])->validate();
+
+        $params = $request->all();
+
+        $params['title'] = $params['title'];
+        $params['slug'] = Str::slug($params['title']);
+        $params['content'] = $params['content'];
+        $params['user_id'] = $request->user()->id;
+        $params['status'] = $params['status'];
+
+        if ($request->file('image')) {
+            Storage::delete($post->image);
+            $params['image'] = $request->file('image')->store('post-images');
+        }
+
+        $tags = explode(",", $params['tags']);
+
+        $post->update($params);
+        $post->categories()->sync($params['categories']);
+        $post->untag();
+        $post->tag($tags);
+
+        Alert::success('', 'Artikel berhasil diedit');
+        return redirect('/posts');
+
+        // } catch (Exception $e) {
+        //     report($e);
+        //     Alert::toast($e->getMessage(), 'error');
+        //     return redirect('/posts');
+        // }
     }
 
     public function posting(Request $request)
