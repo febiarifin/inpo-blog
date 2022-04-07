@@ -33,6 +33,8 @@ class BlogController extends Controller
             $post = Post::where('id', $id)->where('slug', $slug)->where('user_id', $user->id)->where('status', 1)->first();
             $relatedPosts = Post::inRandomOrder()->limit(6)->get();
 
+            views($post)->record();
+
             if (!$post) {
                 abort(403);
             }

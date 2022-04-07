@@ -145,7 +145,10 @@
                                         <p class="card-text">
                                             {{ Str::substr($post->content,5,35) }}...
                                             <br>
-                                            <small class="text-muted">Published on {{ $post->published_at }}</small>
+                                            <small class="text-muted">
+                                                <i class="fa-solid fa-clock"></i> {{ $post->published_at }},
+                                                <i class="fa-solid fa-eye"></i> {{ views($post)->count() }}
+                                            </small>
                                         </p>
                                     </div>
                                 </div>
@@ -163,7 +166,11 @@
                         <h5 class="card-title mb-0">Views</h5>
                     </div>
                     <div class="card-body px-4">
-                        <div id="world_map" style="height:350px;"></div>
+                        <div id="world_map" style="height:350px;">
+                            <div class="chart">
+                                <canvas id="chart-views"></canvas>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -199,4 +206,56 @@
         });
     });
 </script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+            // Bar chart
+            var today = new Date();
+            new Chart(document.getElementById("chart-views"), {
+                type: "bar",
+                data: {
+                    labels: [
+                        today
+                    ],
+                    datasets: [{
+                        label: "Views",
+                        backgroundColor: window.theme.primary,
+                        borderColor: window.theme.primary,
+                        hoverBackgroundColor: window.theme.primary,
+                        hoverBorderColor: window.theme.primary,
+                        data: [
+                            {{$postViews}}
+                        ],
+                        barPercentage: .75,
+                        categoryPercentage: .5
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    legend: {
+                        display: false
+                    },
+                    scales: {
+                        yAxes: [{
+                            gridLines: {
+                                display: false
+                            },
+                            stacked: false,
+                            ticks: {
+                                stepSize: 20
+                            }
+                        }],
+                        xAxes: [{
+                            stacked: false,
+                            gridLines: {
+                                color: "transparent"
+                            }
+                        }]
+                    }
+                }
+            });
+        });
+</script>
+
 @endsection

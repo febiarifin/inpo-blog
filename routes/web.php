@@ -71,3 +71,5 @@ Route::get('/users', [UserController::class, 'index'])->name('users')->middlewar
 Route::post('/user-banned', [UserController::class, 'userBanned'])->middleware('admin');
 
 Route::post('/user-activate', [UserController::class, 'userActivate'])->middleware('admin');
+
+Route::get('post/chart', [HomeController::class, 'chart'])->middleware('auth');

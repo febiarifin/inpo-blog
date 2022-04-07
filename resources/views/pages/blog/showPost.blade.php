@@ -16,9 +16,13 @@
         <img src="{{ asset($post->image) }}" class="img-fluid" alt="{{ $post->slug }}">
     </div>
 
-    <p class="mb-3">Oleh <a href="{{ url('user/'.$post->user->name) }}" class="link-post">{{ $post->user->name }}</a>,
-        Published On {{ $post->published_at
-        }}</p>
+    <p class="mb-3">
+        <i class="fa-solid fa-user"></i>
+        <a href="{{ url('user/'.$post->user->name) }}" class="link-post">{{
+            $post->user->name }} </a>,
+        <i class="fa-solid fa-clock"></i> {{ $post->published_at}},
+        <i class="fa-solid fa-eye"></i> {{ views($post)->count() }}
+    </p>
 
     <p class="h1 mb-5 mt-3">{{ $post->title }}</p>
 

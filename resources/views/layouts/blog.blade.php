@@ -139,7 +139,7 @@
         by <a href="https://github.com/febiarifin">febiarifin <i class="fa-solid fa-heart"></i></a>
         <a href="https://github.com/febiarifin/inpo-blog">Github <i class="fa-brands fa-github"></i></a>
         <br>for business / recruiting purposes? Contact Me on
-        <a href="mailto:febiarifin0@gmail.com">febiarifim0@gmail.com <i class="fa-brands fa-email"></i></a>
+        <a href="mailto:febiarifin0@gmail.com">febiarifin0@gmail.com <i class="fa-brands fa-email"></i></a>
     </div>
 
 

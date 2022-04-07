@@ -4,11 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use CyrildeWit\EloquentViewable\InteractsWithViews;
+use CyrildeWit\EloquentViewable\Contracts\Viewable;
 
-class Post extends Model
+class Post extends Model implements Viewable
 {
     use HasFactory;
     use \Conner\Tagging\Taggable;
+    use InteractsWithViews;
 
     protected $fillable = ['title', 'slug', 'content', 'image', 'status', 'published_at', 'user_id'];
 

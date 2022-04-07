@@ -169,6 +169,7 @@ return [
          */
         \Conner\Tagging\Providers\TaggingServiceProvider::class,
         Yajra\Disqus\DisqusServiceProvider::class,
+        CyrildeWit\EloquentViewable\EloquentViewableServiceProvider::class,
         /*
          * Application Service Providers...
          */
