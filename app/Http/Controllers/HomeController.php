@@ -58,30 +58,4 @@ class HomeController extends Controller
             'date' => $date,
         ]);
     }
-
-    public function chart()
-    {
-        $posts = Post::where('user_id', Auth::user()->id)->get();
-
-        $postViews = DB::table('views')
-            ->select('viewable_id', DB::raw('count(*) as total'))
-            ->groupBy('viewable_id')
-            ->get();
-
-        // foreach ($postViews as $pv) {
-        //     foreach ($posts as $pst) {
-        //         if ($pst->id === $pv->viewable_id) {
-        //             $post = $pv->viewable_id;
-        //             $p = Post::find($post);
-        //             echo $p->title . $pv->total . '<br>';
-        //         }
-        //     }
-        // }
-
-        // $result = DB::table('views')
-        //     ->orderBy('viewed_at', 'ASC')
-        //     ->get();
-
-        return response()->json($postViews);
-    }
 }

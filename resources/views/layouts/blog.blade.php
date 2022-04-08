@@ -66,6 +66,13 @@
             background-color: #243342;
         }
 
+        pre {
+            background-color: #161b22;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
         @media screen and (min-width: 600px) {
             .container-show-post {
                 padding: 100px 150px 100px 150px;

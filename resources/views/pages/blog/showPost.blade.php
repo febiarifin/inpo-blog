@@ -7,9 +7,7 @@
         @foreach ($post->categories as $category)
         <a href="{{ url('category/'.$category->slug) }}" class="link-post">{{$category->name}}</a>
         @endforeach
-        /
-        {{-- <a href="{{ url('user/'.$post->user->name) }}" class="link-post">{{$post->user->name }}</a>/ --}}
-        <a href="#" class="link-post">{{$post->slug}}</a>
+        / <a href="#" class="link-post">{{$post->slug}}</a>
     </p>
 
     <div class="mb-3">
@@ -66,7 +64,6 @@
 </div>
 
 {{-- Related Posts --}}
-
 <div class="mt-5">
     <div class="p-1 bg-white text-center box-related">
         <p class="fs-4 mt-3">Related Post</p>
@@ -93,21 +90,24 @@
                     </h5>
 
                     <p class="text-secondary">
-                        <a href="{{ url('user/'.$post->user->name) }}" class="text-secondary link-post">
+                        <i class="fa-solid fa-user"></i> <a href="{{ url('user/'.$post->user->name) }}"
+                            class="text-secondary link-post">
                             {{ $post->user->name }}
                         </a>,
-                        {{ $post->published_at}}
+                        <i class="fa-solid fa-clock"></i> {{ $post->published_at}}
                     </p>
 
+                    <p class="text-secondary">{{ Str::substr($post->content,5, 100) }}...</p>
+
                     @foreach ($post->tags as $tag)
-                    <a href="{{ url('tag/'.$tag->slug) }}" class="badge bg-light text-secondary link-post">
+                    <a href="{{ url('tag/'.$tag->slug) }}" class="badge bg-light text-secondary text-decoration-none">
                         {{ $tag->name }}
                     </a>
                     @endforeach
 
                     <div class="mt-4">
                         <a href="{{ url('post/'.$post->user->name.'/'.$post->id.'/'.$post->slug) }}"
-                            class="text-primary">Baca
+                            class="text-primary fw-bold text-decoration-none">Baca
                             selengkapnya</a>
                     </div>
                 </div>

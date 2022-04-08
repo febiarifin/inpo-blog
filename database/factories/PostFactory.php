@@ -20,7 +20,7 @@ class PostFactory extends Factory
      */
     public function definition()
     {
-        // $user = User::factory()->create();
+        $user = User::factory()->create();
         $title = $this->faker->sentence();
         return [
             'title' => $title,
@@ -29,7 +29,7 @@ class PostFactory extends Factory
             'image' => $this->faker->imageUrl(640, 480),
             'status' => 1,
             'published_at' => date('Y-m-d H:i:s'),
-            'user_id' => 5
+            'user_id' => $user->id,
         ];
     }
 }

@@ -18,29 +18,31 @@
                 @endforeach
 
                 <h5 class="card-title">
-                    <a href="{{ url('post/'.$post->user->name.'/'.$post->id.'/'.$post->slug) }}" class="link-post">{{
+                    <a href="{{ url('post/'.$post->user->name.'/'.$post->id.'/'.$post->slug) }}"
+                        class="text-decoration-none link-post">{{
                         Str::substr($post->title,0,50) }}</a>
                 </h5>
 
                 <p class="text-secondary">
                     <i class="fa-solid fa-user"></i>
-                    <a href="{{ url('user/'.$post->user->name) }}" class="text-secondary link-post">
+                    <a href="{{ url('user/'.$post->user->name) }}" class="text-decoration-none text-secondary">
                         {{ $post->user->name }}
                     </a>,
                     <i class="fa-solid fa-clock"></i> {{ $post->published_at}}
-                    {{-- , <i class="fa-solid fa-eye"></i> {{ views($post)->count() }} --}}
                 </p>
 
+                <p class="text-secondary">{{ Str::substr($post->content,5, 100) }}...</p>
+
                 @foreach ($post->tags as $tag)
-                <a href="{{ url('tag/'.$tag->slug) }}" class="badge bg-light text-secondary link-post">
+                <a href="{{ url('tag/'.$tag->slug) }}" class="badge bg-light text-secondary text-decoration-none">
                     {{ $tag->name }}
                 </a>
                 @endforeach
 
                 <div class="mt-4">
                     <a href="{{ url('post/'.$post->user->name.'/'.$post->id.'/'.$post->slug) }}"
-                        class="text-primary">Baca
-                        selengkapnya</a>
+                        class="text-primary text-decoration-none fw-bold">Baca
+                        selengkapnya...</a>
                 </div>
             </div>
         </div>

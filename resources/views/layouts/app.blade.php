@@ -151,7 +151,7 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="">
+                                <a class="dropdown-item" href="{{ route('profile') }}">
                                     <i class=" fa-solid fa-user"></i> Profile
                                 </a>
 

@@ -72,4 +72,6 @@ Route::post('/user-banned', [UserController::class, 'userBanned'])->middleware('
 
 Route::post('/user-activate', [UserController::class, 'userActivate'])->middleware('admin');
 
-Route::get('post/chart', [HomeController::class, 'chart'])->middleware('auth');
+Route::get('/profile', [UserController::class, 'userEdit'])->name('profile')->middleware('auth');
+
+Route::post('/profile-update', [UserController::class, 'userUpdate'])->middleware('auth');
