@@ -5,7 +5,7 @@
 {{-- Related Post --}}
 <div class="row gy-5 rows-cols-3">
     @if ($messageResult !== "")
-    <div class="container">
+    <div class="container mb-5" style="height: 345px">
         <div class="p-5 mt-5 bg-white bordered text-center text-uppercase">
             <h1>{!! nl2br($messageResult) !!}</h1>
         </div>
@@ -52,7 +52,6 @@
     </div>
 
     @endforeach
-
 
     {{-- <div class="text-center">
         {{ $posts->links() }}

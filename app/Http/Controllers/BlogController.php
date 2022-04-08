@@ -17,7 +17,6 @@ class BlogController extends Controller
     public function index()
     {
         $posts = Post::with(['categories', 'user', 'tagged'])->orderBy('published_at', 'DESC')->where('status', '1')->paginate(9);
-        // $posts = Post::with(['categories', 'user', 'taggable'])->get();
         $categories = Category::all();
 
         return view('pages.blog.posts', [
@@ -32,7 +31,7 @@ class BlogController extends Controller
     {
         try {
             $user = User::where('name', $user)->first();
-            $post = Post::where('id', $id)->where('slug', $slug)->where('user_id', $user->id)->where('status', 1)->first();
+            $post = Post::with(['user', 'tagged', 'categories'])->where('id', $id)->where('slug', $slug)->where('user_id', $user->id)->where('status', 1)->first();
 
             $relatedPosts = Post::with(['categories', 'user', 'tagged'])->inRandomOrder()->limit(6)->get();
 
@@ -66,10 +65,9 @@ class BlogController extends Controller
     {
         $category = Category::where('slug', $categorySlug)->first();
         $posts = $category->posts()->with(['categories', 'user', 'tagged'])->where('status', 1)->paginate(9);
-        // $posts = $category->posts->load('categories', 'user', 'tagged')->where('status', 1);
         $categories = Category::all();
 
-        return view('pages.blog.showByCategory', [
+        return view('pages.blog.posts', [
             'posts' => $posts,
             'categories' => $categories,
             'menuActive' => $categorySlug,
@@ -79,11 +77,10 @@ class BlogController extends Controller
 
     public function showByTag($tagSlug)
     {
-        // $posts = Post::withAllTags($tagSlug)->where('status', 1)->paginate(9);
         $posts = Post::withAllTags($tagSlug)->with(['categories', 'user', 'tagged'])->where('status', 1)->paginate(9);
         $categories = Category::all();
 
-        return view('pages.blog.showByTag', [
+        return view('pages.blog.posts', [
             'posts' => $posts,
             'categories' => $categories,
             'menuActive' => "",
@@ -95,10 +92,9 @@ class BlogController extends Controller
     {
         $user = User::where('name', $user)->first();
         $posts = $user->posts()->with(['categories', 'user', 'tagged'])->where('status', 1)->paginate(9);
-        // $posts = $user->posts->load('categories', 'user', 'tagged')->where('status', 1);
         $categories = Category::all();
 
-        return view('pages.blog.showByUser', [
+        return view('pages.blog.posts', [
             'posts' => $posts,
             'categories' => $categories,
             'menuActive' => "",
